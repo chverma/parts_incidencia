@@ -3,6 +3,11 @@
   "version": "0.0.1",
   "description": "Web per als parts d'incidència",
   "main": "index.js",
+  "dependencies": {
+    "dotenv": "^7.0.0",
+    "express": "~4.x",
+    "mongoose": "latest"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
