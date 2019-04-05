@@ -1,20 +1,15 @@
-require('dotenv').load();
-const express = require('express'),
-  app = express(),
-  bodyParser = require('body-parser'),
-  port = process.env.PORT || 3000,
-  mysql = require('mysql');
+require('dotenv').config();
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 8080;
+var path = require('path');
+// Static files
+app.use(express.static(path.join(__dirname, 'public')));
 
+var routes = require('./app/routes/routes'); // importing route
+routes(app); // register the routes
 
-// Localización de los ficheros estÃ¡ticos
-app.use(express.static(__dirname + '/public'));
-
-
-
-var routes = require('./app/routes/routes'); //importing route
-routes(app); //register the routes
-
-// Escucha en el puerto 8080 y corre el server
-app.listen(8080, function() {
-	console.log('App listening on port 8080');
+// Listen & run server
+app.listen(port, function () {
+  console.log('App listening on port 8080');
 });
