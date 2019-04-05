@@ -8,6 +8,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 var routes = require('./app/routes/routes'); // importing route
 routes(app); // register the routes
+var incidenceRoutes = require('./app/routes/routesIncidence'); // importing route
+incidenceRoutes(app);
 
 // Listen & run server
 app.listen(port, function () {
