@@ -48,7 +48,6 @@ Incidence.getAllIncidence = function (result) {
       console.error('error: ', err);
       result(null, err);
     } else {
-      console.log('tasks : ', res);
       result(null, res);
     }
   });

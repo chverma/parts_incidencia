@@ -61,7 +61,6 @@ function getDetailController ($scope, $http, $location) {
       date: new Date($scope.formData.dia_com_pares),
       language: 'ca-ES'
     })
-    console.log(data);
   })
   .error(function (data) {
     console.log('Error: ' + data);
