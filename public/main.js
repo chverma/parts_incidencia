@@ -55,12 +55,12 @@ function getDetailController ($scope, $http, $location) {
     $('#datetimepicker1').datetimepicker({
       date: new Date($scope.formData.data),
       language: 'ca-ES'
-    })
+    });
     //$('#dia_com_pares').val(parseDate($scope.formData.dia_com_pares, false));
     $('#datetimepicker2').datetimepicker({
       date: new Date($scope.formData.dia_com_pares),
       language: 'ca-ES'
-    })
+    });
   })
   .error(function (data) {
     console.log('Error: ' + data);
@@ -109,4 +109,15 @@ function getAllController ($scope, $http) {
   .error(function (data) {
     console.log('Error: ' + data);
   });
+
+  // Delete an incidence
+  $scope.deleteIncidence = function (id) {
+    $http.delete('/incidences/' + id)
+    .success(function (data) {
+      location.reload();
+    })
+    .error(function (data) {
+      console.log('Error:' + data);
+    });
+  };
 }

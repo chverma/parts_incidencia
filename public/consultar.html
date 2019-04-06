@@ -37,22 +37,12 @@
                   <td>
                     <a ng-href="/detall.html?incidence_id={{i.incidence_id}}" class="glyphicon glyphicon-eye-open"></a>
                     <a ng-href="/incidences/generate/{{i.incidence_id}}" class="glyphicon glyphicon-download-alt"></a>
+                    <a ng-click="deleteIncidence(i.incidence_id)" class="glyphicon glyphicon-remove-circle"></a>
                   </td>
                 </tr>
               <tbody>
             </table>
          </div>
-         <!--Formulario para insertar nuevos Todo-->
-         <div id="todo-form" class="row">
-           <div class="col-sm-8 col-sm-offset-2 text-center">
-             <form>
-               <div class="form-group">
-                 <input type="text" class="form-control input-lg text-center" placeholder="Inserta una incidència nova" ng-model="formData.text">
-               </div>
-               <button class="btn btn-primary btn-lg" ng-click="createIncidence()">Afegir</button>
-             </form>
-            </div>
-        </div>
     </div>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
