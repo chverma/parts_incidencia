@@ -34,7 +34,10 @@
                   <td ng-bind="i.data | date:'hh:mm'"></td>
                   <td>{{ i.grup }}</td>
                   <td>{{ i.assignatura }}</td>
-                  <td>Vore</td>
+                  <td>
+                    <a ng-href="/detall.html?incidence_id={{i.incidence_id}}" class="glyphicon glyphicon-eye-open"></a>
+                    <a ng-href="/incidences/generate/{{i.incidence_id}}" class="glyphicon glyphicon-download-alt"></a>
+                  </td>
                 </tr>
               <tbody>
             </table>

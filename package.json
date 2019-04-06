@@ -4,8 +4,11 @@
   "description": "Web per als parts d'incidència",
   "main": "index.js",
   "dependencies": {
+    "@nativedocuments/docx-wasm": "^2.2.8-1547344486",
+    "docxtemplater": "^3.9.9",
     "dotenv": "^7.0.0",
     "express": "~4.x",
+    "jszip": "^2.6.1",
     "mysql": "latest"
   },
   "scripts": {

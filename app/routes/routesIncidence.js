@@ -11,6 +11,7 @@ module.exports = function (app) {
   app.get('/incidences/:incidenceId', incidencesList.read_an_incidence);
   app.put('/incidences/:incidenceId', incidencesList.update_an_incidence);
   app.delete('/incidences/:incidenceId', incidencesList.delete_an_incidence);
+  app.get('/incidences/generate/:incidenceId', incidencesList.generate_pdf);
 };
 /*
 exports.create_an_incidence = function (req, res) {
