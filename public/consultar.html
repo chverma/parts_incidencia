@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ca" ng-app="angularIncidencies">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Incidències</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+</head>
+<body ng-controller="getAllController">
+	<div class="container">
+    <!--Cabecera-->
+    	<div class="jumbotron text-center">
+        	<h1>Número d'incidències <span class="label label-info">{{ incidences.length }}</span></h1>
+        </div>
+        <!--Lista de Todos-->
+        <div id="todo-list" class="row">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Alumne/a</th>
+                  <th scope="col">Professor/a</th>
+                  <th scope="col">Data</th>
+                  <th scope="col">Hora</th>
+                  <th scope="col">Grup</th>
+                  <th scope="col">Assignatura</th>
+                  <th scope="col">Opcions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="i in incidences">
+                  <td>{{ i.al_nom }} {{ i.al_cog1 }} {{ i.al_cog2 }}</td>
+                  <td>{{ i.prof_nom }} {{ i.prof_cog1 }} {{ i.prof_cog2 }}</td>
+                  <td ng-bind="i.data | date:'dd/MM/yyyy'"></td>
+                  <td ng-bind="i.data | date:'hh:mm'"></td>
+                  <td>{{ i.grup }}</td>
+                  <td>{{ i.assignatura }}</td>
+                  <td>Vore</td>
+                </tr>
+              <tbody>
+            </table>
+         </div>
+         <!--Formulario para insertar nuevos Todo-->
+         <div id="todo-form" class="row">
+           <div class="col-sm-8 col-sm-offset-2 text-center">
+             <form>
+               <div class="form-group">
+                 <input type="text" class="form-control input-lg text-center" placeholder="Inserta una incidència nova" ng-model="formData.text">
+               </div>
+               <button class="btn btn-primary btn-lg" ng-click="createIncidence()">Afegir</button>
+             </form>
+            </div>
+        </div>
+    </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

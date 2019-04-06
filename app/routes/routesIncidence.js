@@ -12,14 +12,15 @@ module.exports = function (app) {
   app.put('/incidences/:incidenceId', incidencesList.update_an_incidence);
   app.delete('/incidences/:incidenceId', incidencesList.delete_an_incidence);
 };
-
+/*
 exports.create_an_incidence = function (req, res) {
   var newIncidence = new Incidence(req.body);
+  console.log(newIncidence, newIncidence)
   // handles null error
-  if (!newIncidence.incidence || !newIncidence.status) {
-    res.status(400).send({error: true, message: 'Please provide incidence/status'});
+  if (!newIncidence.incidence) {
+    res.status(400).send({error: true, message: 'Please provide incidence'});
   } else {
-    Incidence.createTask(newIncidence, function (err, incidence) {
+    Incidence.createIncidence(newIncidence, function (err, incidence) {
       if (err) {
         res.send(err);
       }
@@ -53,4 +54,4 @@ exports.delete_an_incidence = function (req, res) {
     }
     res.json({ message: 'Incidence successfully deleted' });
   });
-};
+};*/

@@ -17,8 +17,8 @@ exports.create_an_incidence = function (req, res) {
   var newIncidence = new Incidence(req.body);
 
   // handles null error
-  if (!newIncidence.incidence || !newIncidence.status) {
-    res.status(400).send({error: true, message: 'Please provide incidence/status'});
+  if (!newIncidence) {
+    res.status(400).send({error: true, message: 'Please provide incidence'});
   } else {
     Incidence.createIncidence(newIncidence, function (err, incidence) {
       if (err) {
