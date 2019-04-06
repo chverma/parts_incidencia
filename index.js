@@ -17,6 +17,8 @@ var routes = require('./app/routes/routes'); // importing route
 routes(app); // register the routes
 var incidenceRoutes = require('./app/routes/routesIncidence'); // importing route
 incidenceRoutes(app);
+var faultRoutes = require('./app/routes/routesFaults'); // importing route
+faultRoutes(app);
 
 // Listen & run server
 app.listen(port, function () {
