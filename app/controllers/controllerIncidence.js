@@ -48,7 +48,7 @@ exports.update_an_incidence = function (req, res) {
 };
 
 exports.delete_an_incidence = function (req, res) {
-  Incidence.remove(req.params.incidenceId, function (err, incidence) {
+  Incidence.removeById(req.params.incidenceId, function (err, incidence) {
     if (err) {
       res.send(err);
     }

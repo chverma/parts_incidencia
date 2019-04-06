@@ -32,7 +32,7 @@ Incidence.createIncidence = function (newIncidence, result) {
 };
 
 Incidence.getIncidenceById = function (incidenceId, result) {
-  sql.query('Select task from incidence where id = ? ', incidenceId, function (err, res) {
+  sql.query('Select * from incidence where incidence_id = ? ', incidenceId, function (err, res) {
     if (err) {
       console.error('error: ', err);
       result(err, null);
@@ -55,18 +55,18 @@ Incidence.getAllIncidence = function (result) {
 };
 
 Incidence.updateById = function (id, incidence, result) {
-  sql.query('UPDATE incidence SET task = ? WHERE id = ?', [incidence.incidence, id], function (err, res) {
+  sql.query('UPDATE incidence SET ? WHERE incidence_id = ?', [incidence, id], function (err, res) {
     if (err) {
       console.error('error: ', err);
       result(null, err);
     } else {
-      result(null, res);
+      result(null, incidence);
     }
   });
 };
 
 Incidence.removeById = function (id, result) {
-  sql.query('DELETE FROM incidence WHERE id = ?', [id], function (err, res) {
+  sql.query('DELETE FROM incidence WHERE incidence_id = ?', [id], function (err, res) {
     if (err) {
       console.error('error: ', err);
       result(null, err);

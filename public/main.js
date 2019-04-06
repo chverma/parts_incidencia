@@ -1,4 +1,7 @@
-angular.module('angularIncidencies', []);
+var appModule = angular.module('angularIncidencies', []);
+appModule.config(['$locationProvider', function ($locationProvider) {
+  $locationProvider.html5Mode(true);
+}]);
 
 function formatDate (strDate) {
   var dateArr = strDate.split(' ');
@@ -8,6 +11,16 @@ function formatDate (strDate) {
     dateObj += ' ' + dateArr[1] + ':00';
   }
   return dateObj;
+}
+
+function parseDate(date, isTime) {
+  var newDate = new Date(date);
+  var str_date = newDate.getDate() + '-' + (newDate.getMonth() + 1) + '-' + newDate.getFullYear();
+  str_date = str_date.replace(/\b(\d{1})\b/g, '0$1');
+  if (isTime) {
+    str_date += ' ' + newDate.getHours() + ':' + newDate.getMinutes();
+  }
+  return str_date;
 }
 function createIncidenceController ($scope, $http) {
   // When new incidence is created, send it to the backend API
@@ -33,20 +46,49 @@ function createIncidenceController ($scope, $http) {
 function getDetailController ($scope, $http, $location) {
   $scope.formData = {};
   $scope.parameters = $location.search();
-  console.log($scope.parameters)
+
   // When the page is loadead, get from the API the incidences
-  $http.get('/incidences')
+  $http.get('/incidences/' + $scope.parameters.incidence_id)
   .success(function (data) {
-    $scope.incidences = data;
+    $scope.formData = data[0];
+    //$('#dataihora').val(parseDate($scope.formData.data, true));
+    $('#datetimepicker1').datetimepicker({
+      date: new Date($scope.formData.data),
+      language: 'ca-ES'
+    })
+    //$('#dia_com_pares').val(parseDate($scope.formData.dia_com_pares, false));
+    $('#datetimepicker2').datetimepicker({
+      date: new Date($scope.formData.dia_com_pares),
+      language: 'ca-ES'
+    })
     console.log(data);
   })
   .error(function (data) {
     console.log('Error: ' + data);
   });
 
+  $scope.modifyIncidence = function () {
+    $scope.formData.data = formatDate($('#dataihora').val());
+    if ($('#dia_com_pares').val() === '') {
+      $scope.formData.dia_com_pares = undefined;
+    } else {
+      $scope.formData.dia_com_pares = formatDate($('#dia_com_pares').val());
+    }
+    $http.put('/incidences/' + $scope.formData.incidence_id, $scope.formData)
+    .success(function (data) {
+      //$scope.formData = {};
+      $scope.incidences = data;
+      console.log(data);
+    })
+    .error(function (data) {
+      console.log('Error:' + data);
+    });
+  };
+
   // Delete an incidence
-  $scope.deleteIncidence = function (id) {
-    $http.delete('/incidence/' + id)
+  $scope.deleteIncidence = function () {
+    var id = $scope.formData.incidence_id;
+    $http.delete('/incidences/' + id)
     .success(function (data) {
       $scope.incidences = data;
       console.log(data);
