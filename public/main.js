@@ -23,6 +23,15 @@ function parseDate(date, isTime) {
   return str_date;
 }
 function createIncidenceController ($scope, $http) {
+  // Get the faults
+  $http.get('/faults/')
+  .success(function (data) {
+    $scope.faults = data;
+  })
+  .error(function (data) {
+    console.log('Error: ' + data);
+  });
+
   // When new incidence is created, send it to the backend API
   $scope.createIncidence = function () {
     $scope.formData.data = formatDate($('#dataihora').val());
@@ -46,17 +55,24 @@ function createIncidenceController ($scope, $http) {
 function getDetailController ($scope, $http, $location) {
   $scope.formData = {};
   $scope.parameters = $location.search();
-
+  // Get the faults
+  $http.get('/faults/')
+  .success(function (data) {
+    $scope.faults = data;
+  })
+  .error(function (data) {
+    console.log('Error: ' + data);
+  });
   // When the page is loadead, get from the API the incidences
   $http.get('/incidences/' + $scope.parameters.incidence_id)
   .success(function (data) {
     $scope.formData = data[0];
-    //$('#dataihora').val(parseDate($scope.formData.data, true));
+    $('#dataihora').val(parseDate($scope.formData.data, true));
     $('#datetimepicker1').datetimepicker({
       date: new Date($scope.formData.data),
       language: 'ca-ES'
     });
-    //$('#dia_com_pares').val(parseDate($scope.formData.dia_com_pares, false));
+    $('#dia_com_pares').val(parseDate($scope.formData.dia_com_pares, false));
     $('#datetimepicker2').datetimepicker({
       date: new Date($scope.formData.dia_com_pares),
       language: 'ca-ES'
