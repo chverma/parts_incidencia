@@ -4,8 +4,9 @@
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Incidències</title>
-    <link href="./css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="./css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" type="text/css" media="screen" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
 </head>
 <body ng-controller="createIncidenceController">
   <div class="container">
@@ -79,20 +80,26 @@
           </form>
         </div>
     </div>
-    <script type="text/javascript" src="./js/jquery-1.8.3.min.js" charset="UTF-8"></script>
-    <script type="text/javascript" src="./js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="./js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-    <script type="text/javascript" src="./js/bootstrap-datetimepicker.ca.js" charset="UTF-8"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>      
+    <script src="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
     <script src="main.js"></script>
     <script type="text/javascript">
       $(document).ready(function(){
-        $('#datetimepicker1').datetimepicker({
-          language: 'ca-ES'
-        });
-        $('#datetimepicker2').datetimepicker({
-          language: 'ca-ES'
-        });
+        var dateTime1 = $('#datetimepicker1').datetimepicker({
+		  locale: 'ca',
+		  format: 'DD-MM-YYYY HH:mm',
+		  defaultDate: new Date(),
+		});
+
+		// Date Picker for dia_com_pares
+		var dateTime = $('#datetimepicker2').datetimepicker({
+		  locale: 'ca',
+		  format: 'DD-MM-YYYY',
+		  defaultDate: new Date(),
+		});
       });
     </script>
 </body>
