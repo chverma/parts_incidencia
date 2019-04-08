@@ -1,14 +1,16 @@
 /**
  * Catalan translation for bootstrap-datetimepicker
- * Cristian Verdú <chvermat@gmail.com>
+ * J. Garcia <jogaco.en@gmail.com>
  */
 ;(function($){
-	$.fn.datetimepicker.dates['ca-ES'] = {
+	$.fn.datetimepicker.dates['ca'] = {
 		days: ["Diumenge", "Dilluns", "Dimarts", "Dimecres", "Dijous", "Divendres", "Dissabte", "Diumenge"],
-		daysShort: ["Diu", "Dill", "Dima", "Dime", "Dij", "Div", "Dis", "Diu"],
-		daysMin: ["Dg", "Di", "Dm", "Dx", "Dj", "Dv", "Ds", "Dg"],
+		daysShort: ["Diu",  "Dil", "Dmt", "Dmc", "Dij", "Div", "Dis", "Diu"],
+		daysMin: ["dg", "dl", "dt", "dc", "dj", "dv", "ds", "dg"],
 		months: ["Gener", "Febrer", "Març", "Abril", "Maig", "Juny", "Juliol", "Agost", "Setembre", "Octubre", "Novembre", "Desembre"],
 		monthsShort: ["Gen", "Feb", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Oct", "Nov", "Des"],
-		today: "Hui"
+		today: "Avui",
+		suffix: [],
+		meridiem: []
 	};
 }(jQuery));

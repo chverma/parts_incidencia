@@ -67,15 +67,32 @@ function getDetailController ($scope, $http, $location) {
   $http.get('/incidences/' + $scope.parameters.incidence_id)
   .success(function (data) {
     $scope.formData = data[0];
-    $('#dataihora').val(parseDate($scope.formData.data, true));
-    $('#datetimepicker1').datetimepicker({
+    //$('#dataihora').val(parseDate($scope.formData.data, true));
+    // http://eonasdan.github.io/bootstrap-datetimepicker/#view-mode
+    var dateTime1 = $('#datetimepicker1').datetimepicker({
       date: new Date($scope.formData.data),
-      language: 'ca-ES'
+      language: 'ca-ES',
+      weekStart: 1,
+      todayBtn: 1,
+      autoclose: 1,
+      todayHighlight: 0,
+      startView: 2,
+      forceParse: 0,
+      showMeridian: 1,
+      showClose: 1
     });
-    $('#dia_com_pares').val(parseDate($scope.formData.dia_com_pares, false));
+
+    //$('#dia_com_pares').val(parseDate($scope.formData.dia_com_pares, false));
     $('#datetimepicker2').datetimepicker({
       date: new Date($scope.formData.dia_com_pares),
-      language: 'ca-ES'
+      language: 'ca-ES',
+      weekStart: 1,
+      todayBtn: 1,
+      autoclose: 1,
+      todayHighlight: 1,
+      startView: 2,
+      forceParse: 0,
+      showMeridian: 1
     });
   })
   .error(function (data) {

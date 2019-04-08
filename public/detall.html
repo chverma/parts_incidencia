@@ -4,110 +4,97 @@
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Incidències</title>
-    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" media="screen"
-     href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
-    <!--link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css"-->
-    <link rel="stylesheet" href="./css/bootstrap-datetimepicker.min.css">
+    <link href="./css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="./css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
 </head>
 <body ng-controller="getDetailController">
-  <script type="text/javascript"
-     src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js">
-    </script>
-    <script type="text/javascript"
-     src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js">
-    </script>
-    <script type="text/javascript"
-     src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
-    </script>
-    <script type="text/javascript"
-     src="./js/catalan-datepicker.js">
-    </script>
-  <!--script type="text/javascript" src="./js/bootstrap-datetimepicker.min.js"></script-->
   <div class="container">
     <!--Cabecera-->
     <div class="jumbotron text-center">
-      <h1>Modificar incidència</h1>
+      Datall d'incidència
     </div>
         <!--Lista de Todos-->
         <div id="incidence-container" class="row">
           <form>
             <div class="row">
-              <div class="col-md-2">
+              <div class="col-md-2 form-group">
                 <label>Nom alumne/a:</label>
-                <input type="text"  placeholder="Nom alumne" ng-model="formData.al_nom"  required>
+                <input type="text" class="form-control" placeholder="Nom alumne" ng-model="formData.al_nom"  required>
               </div>
-              <div class="col-md-2">
+              <div class="col-md-2 form-group">
                 <label>Cognoms alumne/a:</label>
-                <input type="text" class="text-center" placeholder="1er cognom alumne/a" ng-model="formData.al_cog1"  required>
-                <input type="text" class="text-center" placeholder="2on cognom alumne/a" ng-model="formData.al_cog2"  required>
+                <input type="text" class="text-center form-control" placeholder="1er cognom alumne/a" ng-model="formData.al_cog1"  required>
+                <input type="text" class="text-center form-control" placeholder="2on cognom alumne/a" ng-model="formData.al_cog2"  required>
               </div>
             </div>
             <div class="form-group">
               <label>Nom professor</label>
-              <input type="text" class="text-center" placeholder="Nom professor/a" ng-model="formData.prof_nom"  required>
+              <input type="text" class="text-center form-control" placeholder="Nom professor/a" ng-model="formData.prof_nom"  required>
             </div>
             <div class="form-group">
               <label>Cognoms professor/a:</label>
-              <input type="text" class="text-center" placeholder="1er cognom professor/a" ng-model="formData.prof_cog1"  required>
-              <input type="text" class="text-center" placeholder="2on cognom professor/a" ng-model="formData.prof_cog2"  required>
+              <input type="text" class="text-center form-control" placeholder="1er cognom professor/a" ng-model="formData.prof_cog1"  required>
+              <input type="text" class="text-center form-control" placeholder="2on cognom professor/a" ng-model="formData.prof_cog2"  required>
             </div>
             <div class="form-group">
               <label>Ha actuat greument perjudicant la convivència en el centre al:</label>
-              <select name="repeatSelect" id="faultsSelect" ng-model="formData.motiu" ng-options="fault.falta_id as fault.descripcio for (key, fault) in faults" required>
+              <select name="repeatSelect" class="form-control" id="faultsSelect" ng-model="formData.motiu" ng-options="fault.falta_id as fault.descripcio for (key, fault) in faults" required>
               </select>
             </div>
             <div class="form-group">
-              <label>Data i hora</label>
-              <div id="datetimepicker1" class="input-append date">
-                <input id="dataihora" data-format="dd-MM-yyyy hh:mm" type="text"  required></input>
-                <span class="add-on">
-                  <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
-                </span>
+              <label>Data</label>
+              <div id="datetimepicker1" class="input-group date">
+                  <input id="dataihora" class="form-control" data-format="dd-MM-yyyy hh:mm" type="text"  required></input>
+                  <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
               </div>
             </div>
             <div class="form-group">
               <label>Grup</label>
-              <input type="text" class="text-center" placeholder="Grup al que pertany l'alumne" ng-model="formData.grup"  required>
+              <input type="text" class="text-center form-control" placeholder="Grup al que pertany l'alumne" ng-model="formData.grup"  required>
             </div>
             <div class="form-group">
               <label>Assignatura</label>
-              <input type="text" class="text-center" placeholder="Assignatura" ng-model="formData.assignatura"  required>
+              <input type="text" class="text-center form-control" placeholder="Assignatura" ng-model="formData.assignatura"  required>
             </div>
             <div class="form-group">
               <label>Data comunicació pares i mares</label>
-              <div id="datetimepicker2" class="input-append date">
-                <input id="dia_com_pares" data-format="dd-MM-yyyy" type="text"></input>
-                <span class="add-on">
-                  <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
-                </span>
+              <div id="datetimepicker2" class="input-group date">
+                  <input id="dataihora" class="form-control" data-format="dd-MM-yyyy" type="text"></input>
+                  <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
               </div>
             </div>
             <div class="form-group">
               <label>Comentaris</label>
-              <textarea name="Text1" cols="40" rows="5" class="text-center" placeholder="Comentaris" ng-model="formData.comentaris"></textarea>
+              <textarea name="Text1" cols="40" rows="5" class="text-center form-control" placeholder="Comentaris" ng-model="formData.comentaris"></textarea>
             </div>
             <div class="form-group">
               <label>Observacions</label>
-              <textarea name="Text1" cols="40" rows="5" class="text-center" placeholder="Observacions" ng-model="formData.observacions"></textarea>
+              <textarea name="Text1" cols="40" rows="5" class="text-center form-control" placeholder="Observacions" ng-model="formData.observacions"></textarea>
             </div>
             <button class="btn btn-primary btn-lg" ng-click="modifyIncidence()">Modificar</button>
             <button class="btn btn-danger btn-lg" ng-click="deleteIncidence()">Eliminar</button>
           </form>
         </div>
     </div>
-    <!--script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script-->
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+    <script type="text/javascript" src="./js/jquery-1.8.3.min.js" charset="UTF-8"></script>
+<script type="text/javascript" src="./js/bootstrap.min.js"></script>
+<script type="text/javascript" src="./js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="./js/bootstrap-datetimepicker.ca.js" charset="UTF-8"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
     <script src="main.js"></script>
     <script type="text/javascript">
-      $(document).ready(function(){
+      /*$(document).ready(function(){
         $('#datetimepicker1').datetimepicker({
           language: 'ca-ES'
         });
         $('#datetimepicker2').datetimepicker({
           language: 'ca-ES'
         });
-      });
+      });*/
     </script>
 </body>
 </html>
