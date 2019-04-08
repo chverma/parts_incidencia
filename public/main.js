@@ -70,7 +70,8 @@ function getDetailController ($scope, $http, $location) {
     //$('#dataihora').val(parseDate($scope.formData.data, true));
     // http://eonasdan.github.io/bootstrap-datetimepicker/#view-mode
     var dateTime1 = $('#datetimepicker1').datetimepicker({
-      date: new Date($scope.formData.data),
+      defaultDate: new Date($scope.formData.data),
+      format: 'dd-mm-yyyy hh:mm',
       language: 'ca-ES',
       weekStart: 1,
       todayBtn: 1,
@@ -83,17 +84,17 @@ function getDetailController ($scope, $http, $location) {
     });
 
     //$('#dia_com_pares').val(parseDate($scope.formData.dia_com_pares, false));
-    $('#datetimepicker2').datetimepicker({
-      date: new Date($scope.formData.dia_com_pares),
-      language: 'ca-ES',
+    
+    var dateTime = $('#datetimepicker2').datetimepicker({
+      defaultDate: new Date($scope.formData.dia_com_pares),
+      format: 'dd-mm-yyyy',
+      language: 'ca',
       weekStart: 1,
       todayBtn: 1,
-      autoclose: 1,
-      todayHighlight: 1,
-      startView: 2,
-      forceParse: 0,
-      showMeridian: 1
     });
+    dateTime.data().datetimepicker.date = new Date($scope.formData.dia_com_pares);
+    console.log($scope.formData.dia_com_pares)
+    console.log(dateTime.data().datetimepicker.date)
   })
   .error(function (data) {
     console.log('Error: ' + data);
