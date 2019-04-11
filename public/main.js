@@ -22,6 +22,18 @@ function parseDate(date, isTime) {
   }
   return str_date;
 }
+
+function successMessage(msg) {
+    $('.alert-success').css("display", "block")
+    $('#success-message').text(msg)
+    setTimeout(function(){ $('.alert-success').css("display", "none"); }, 10000);
+}
+
+function errorMessage(msg) {
+    $('.alert-danger').css("display", "block")
+    $('#error-message').text(msg)
+    setTimeout(function(){ $('.alert-danger').css("display", "none"); }, 10000);
+}
 function createIncidenceController ($scope, $http) {
   // Get the faults
   $http.get('/faults/')
@@ -44,10 +56,17 @@ function createIncidenceController ($scope, $http) {
     .success(function (data) {
       //$scope.formData = {};
       $scope.incidences = data;
-      console.log(data);
+      console.log(data)
+      if (data.code) {
+        errorMessage('Ha ocorregut un error al crear l\'incidència.' + data.sqlMessage)
+      } else {
+        successMessage('Incidència creada!');
+        setTimeout(function (){ window.location.assign('/detall.html?incidence_id=' + data.incidence_id)}, 2000);
+      }
     })
     .error(function (data) {
       console.log('Error:' + data);
+      errorMessage('Ha ocorregut un error al crear l\'incidència' + data)
     });
   };
 }
@@ -86,6 +105,7 @@ function getDetailController ($scope, $http, $location) {
   })
   .error(function (data) {
     console.log('Error: ' + data);
+    errorMessage('Ha ocorregut un error. ' + data)
   });
 
   $scope.modifyIncidence = function () {
@@ -99,10 +119,11 @@ function getDetailController ($scope, $http, $location) {
     .success(function (data) {
       //$scope.formData = {};
       $scope.incidences = data;
-      console.log(data);
+      successMessage('Modificat correctament')
     })
     .error(function (data) {
       console.log('Error:' + data);
+      errorMessage('Error al modificar ' + data)
     });
   };
 
@@ -112,10 +133,12 @@ function getDetailController ($scope, $http, $location) {
     $http.delete('/incidences/' + id)
     .success(function (data) {
       $scope.incidences = data;
-      console.log(data);
+      successMessage('Incidència borrada correctament.')
+      setTimeout(function (){ window.location.assign('/consultar.html')}, 2000)
     })
     .error(function (data) {
       console.log('Error:' + data);
+      errorMessage('Incidència no borrada. Ha ocorregut un error.')
     });
   };
 }
@@ -140,6 +163,7 @@ function getAllController ($scope, $http) {
     })
     .error(function (data) {
       console.log('Error:' + data);
+      errorMessage('Incidència no borrada. Ha ocorregut un error.')
     });
   };
 }
