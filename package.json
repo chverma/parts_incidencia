@@ -8,8 +8,11 @@
     "docxtemplater": "^3.9.9",
     "dotenv": "^7.0.0",
     "express": "~4.x",
+    "express-session": "^1.16.1",
+    "googleapis": "^39.2.0",
     "jszip": "^2.6.1",
-    "mysql": "latest"
+    "mysql": "latest",
+    "nocache": "^2.0.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

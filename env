@@ -2,3 +2,6 @@ MYSQL_USER=replace
 MYSQL_PASSWD=replace
 MYSQL_DB=replace
 MYSQL_HOST=replace
+GOOGLE_CLIENT_ID=replace
+GOOGLE_CLIENT_SECRET=replace
+GOOGLE_REDIRECT_URL=replace

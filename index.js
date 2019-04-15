@@ -4,6 +4,24 @@ const bodyParser = require('body-parser');
 const app = express();
 const port = process.env.PORT || 8080;
 var path = require('path');
+var Session = require('express-session');
+const nocache = require('nocache');
+
+app.use(nocache());
+// Init Session
+app.use(Session({
+    secret: 'raysources-secret-19890913007',
+    resave: true,
+    saveUninitialized: true
+}));
+
+
+app.use((req,res,next) => {
+    console.log("-----------------log route", req.path)
+    next();
+})
+app.use(checkUser);
+
 // Static files
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -13,12 +31,32 @@ app.use(bodyParser.raw({limit: '50mb'}));
 app.use(bodyParser.text({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
+
+function checkUser(req, res, next) {
+  console.log("checkUser", req.path)
+  if ((req.path === '/login' || req.path === '/oauthCallback') || (req.session && req.session.tokens!==undefined)) {
+    console.error("ENTRE AL NEXT: "+req.path,req.session.tokens!==undefined)
+    return next();
+  } else {
+    //authenticate user
+    console.log("------REDIRECT TO LOGIN")
+    res.writeHead(301, {
+        'Cache-Control': 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0',
+        Location: '/login'});
+    return res.end();
+  }
+
+
+}
+
 var routes = require('./app/routes/routes'); // importing route
 routes(app); // register the routes
 var incidenceRoutes = require('./app/routes/routesIncidence'); // importing route
 incidenceRoutes(app);
 var faultRoutes = require('./app/routes/routesFaults'); // importing route
 faultRoutes(app);
+var signInRoutes = require('./app/routes/routesGoogle');
+signInRoutes(app);
 
 // Listen & run server
 app.listen(port, function () {
