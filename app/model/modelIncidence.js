@@ -17,6 +17,7 @@ var Incidence = function (incidence) {
   this.al_cog2 = incidence.al_cog2;
   this.assignatura = incidence.assignatura;
   this.created_at = new Date();
+  this.email = incidence.email;
 };
 
 Incidence.createIncidence = function (newIncidence, result) {
@@ -42,8 +43,8 @@ Incidence.getIncidenceById = function (incidenceId, result) {
   });
 };
 
-Incidence.getAllIncidence = function (result) {
-  sql.query('Select * from incidence', function (err, res) {
+Incidence.getAllIncidence = function (email, result) {
+  sql.query(`Select * from incidence WHERE email = ?`, [email], function (err, res) {
     if (err) {
       console.error('error: ', err);
       result(null, err);

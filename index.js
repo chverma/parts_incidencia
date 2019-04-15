@@ -35,11 +35,9 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 function checkUser(req, res, next) {
   console.log("checkUser", req.path)
   if ((req.path === '/login' || req.path === '/oauthCallback') || (req.session && req.session.tokens!==undefined)) {
-    console.error("ENTRE AL NEXT: "+req.path,req.session.tokens!==undefined)
     return next();
   } else {
     //authenticate user
-    console.log("------REDIRECT TO LOGIN")
     return res.redirect(301, '/login');
   }
 
@@ -54,6 +52,8 @@ var faultRoutes = require('./app/routes/routesFaults'); // importing route
 faultRoutes(app);
 var signInRoutes = require('./app/routes/routesGoogle');
 signInRoutes(app);
+var userRoutes = require('./app/routes/routesUser');
+userRoutes(app);
 
 // Listen & run server
 app.listen(port, function () {

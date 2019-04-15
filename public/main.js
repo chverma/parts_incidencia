@@ -44,6 +44,17 @@ function createIncidenceController ($scope, $http) {
     console.log('Error: ' + data);
   });
 
+  $scope.formData = {}
+  $http.get('/user')
+  .success(function (data) {
+    $scope.formData.prof_nom = data.name;
+    $scope.formData.prof_cog1 = data.firstFamilyName;
+    $scope.formData.prof_cog2 = data.secondFamilyName;
+  })
+  .error(function (data) {
+    console.log('Error: ' + data);
+  });
+
   // When new incidence is created, send it to the backend API
   $scope.createIncidence = function () {
     $scope.formData.data = formatDate($('#dataihora').val());

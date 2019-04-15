@@ -2,8 +2,8 @@
 
 var Incidence = require('../model/modelIncidence.js');
 
-exports.list_all_incidences = function (req, res) {
-  Incidence.getAllIncidence(function (err, incidence) {
+exports.list_all_incidences = function (req, res, next) {
+  Incidence.getAllIncidence(req.session.userData.email, function (err, incidence) {
     if (err) {
       res.send(err);
     }
@@ -12,6 +12,7 @@ exports.list_all_incidences = function (req, res) {
 };
 
 exports.create_an_incidence = function (req, res) {
+  req.body.email = req.session.userData.email;
   var newIncidence = new Incidence(req.body);
 
   // handles null error

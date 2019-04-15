@@ -15,7 +15,8 @@ module.exports = function (app) {
         // generate a url that asks permissions for Google+ and Google Calendar scopes
         var scopes = [
             'https://www.googleapis.com/auth/plus.me',
-            'https://www.googleapis.com/auth/userinfo.profile'
+            'https://www.googleapis.com/auth/userinfo.profile',
+            'https://www.googleapis.com/auth/userinfo.email'
         ];
      
         var url = oauth2Client.generateAuthUrl({
@@ -34,17 +35,36 @@ module.exports = function (app) {
           if(!err) {
             oauth2Client.setCredentials(tokens);
             req.session.tokens = tokens;
-            /*res.send(`
-                <h3>Login successful!!</h3>
-                <a href="/details">Go to details page</a>
-            `);*/
-            console.error("Redirect to index!!!!")
-            //res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0')
-            /*res.writeHead(301, {
-                'Cache-Control': 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0',
-                Location: '/index.html'
-            });*/
-            return res.redirect(301, '/index.html')
+            
+            var p = new Promise(function (resolve, reject) {
+                plus.people.get({ userId: 'me', auth: oauth2Client }, function(err, response) {
+                    resolve(response || err);
+                });
+            }).then(function (data) {
+                // img: data.data.image.url
+                // Name: data.data.name.givenName
+                // Apellidos: data.data.name.familyName
+                // email: data.data.emails[0].value
+                var familyName = data.data.name.familyName.split(' ');
+                req.session.userData = {
+                    email: data.data.emails[0].value,
+                    avatar: data.data.image.url,
+                    name: data.data.name.givenName,
+                    firstFamilyName: familyName[0],
+                    secondFamilyName: familyName[1]
+                };
+                /*res.send(`
+                   <img src=${data.data.image.url} />
+                    <h3>Hello ${data.data.displayName}</h3>
+                    <br>
+                    Name: ${data.data.name.givenName}
+                    <br>
+                    Surnames: ${data.data.name.familyName}
+                `);*/
+                return res.redirect(301, '/index.html')
+            })
+
+            
             //return res.end();
           }
           else{
@@ -80,7 +100,8 @@ module.exports = function (app) {
     app.use("/login", function (req, res, next) {
         
         var url = getAuthUrl();
-        res.send(`<h1>Authentication using google oAuth</h1><a href=${url}>Login</a>`)
-        return res.end();
+        return res.redirect(301, url);
+        //res.send(`<h1>Authentication using google oAuth</h1><a href=${url}>Login</a>`)
+        //return res.end();
     });
 };
