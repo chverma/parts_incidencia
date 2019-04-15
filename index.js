@@ -40,10 +40,7 @@ function checkUser(req, res, next) {
   } else {
     //authenticate user
     console.log("------REDIRECT TO LOGIN")
-    res.writeHead(301, {
-        'Cache-Control': 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0',
-        Location: '/login'});
-    return res.end();
+    return res.redirect(301, '/login');
   }
 
 

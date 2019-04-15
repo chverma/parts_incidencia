@@ -141,6 +141,10 @@ function getDetailController ($scope, $http, $location) {
       errorMessage('Incidència no borrada. Ha ocorregut un error.')
     });
   };
+
+  $scope.previousPage = function () {
+    window.history.back();
+  }
 }
 
 // Returns all the incidences

@@ -52,8 +52,7 @@ module.exports = function (app) {
                 <h3>Login failed!!</h3>
             `);*/
             console.error("No login!")
-            res.writeHead(301, {Location: '/login'});
-            return res.end();
+            return res.redirect(301, '/login');
           }
         });
     });
