@@ -23,7 +23,7 @@ var Incidence = function (incidence) {
 Incidence.createIncidence = function (newIncidence, result) {
   sql.query('INSERT INTO incidence set ?', newIncidence, function (err, res) {
     if (err) {
-      console.error('error: ', err);
+      //console.error('error: ', err);
       result(err, null);
     } else {
       newIncidence.incidence_id = res.insertId;

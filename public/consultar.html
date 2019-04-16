@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
 </head>
 <body ng-controller="getAllController">
+  <div class="nav-bar" ng-include="'navbar.html'"></div>
 	<div class="container">
     <!--Cabecera-->
     	<div class="jumbotron text-center">
@@ -35,9 +36,9 @@
                   <td>{{ i.grup }}</td>
                   <td>{{ i.assignatura }}</td>
                   <td>
-                    <a ng-href="/detall.html?incidence_id={{i.incidence_id}}" class="glyphicon glyphicon-eye-open"></a>
-                    <a ng-href="/incidences/generate/{{i.incidence_id}}" class="glyphicon glyphicon-download-alt"></a>
-                    <a ng-click="deleteIncidence(i.incidence_id)" class="glyphicon glyphicon-remove-circle"></a>
+                    <a ng-href="/detall.html?incidence_id={{i.incidence_id}}" target="_self" class="glyphicon glyphicon-eye-open"></a>
+                    <a ng-href="/incidences/generate/{{i.incidence_id}}" target="_self" class="glyphicon glyphicon-download-alt"></a>
+                    <a ng-click="deleteIncidence(i.incidence_id)" target="_self" class="glyphicon glyphicon-remove-circle"></a>
                   </td>
                 </tr>
               <tbody>

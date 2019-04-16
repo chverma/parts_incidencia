@@ -21,9 +21,10 @@ exports.create_an_incidence = function (req, res) {
   } else {
     Incidence.createIncidence(newIncidence, function (err, incidence) {
       if (err) {
-        res.send(err);
+        res.status(400).json({error: true, message: err});
+      } else {
+        res.json(incidence);
       }
-      res.json(incidence);
     });
   }
 };

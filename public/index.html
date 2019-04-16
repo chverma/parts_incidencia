@@ -6,7 +6,8 @@
     <title>Incidències</title>
     <link rel="stylesheet" type="text/css" media="screen" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
 </head>
-<body ng-controller="mainController">
+<body ng-controller="indexController" >
+  <div class="nav-bar" ng-include="'navbar.html'"></div> 
   <div class="container">
     <div class="row">
       <div class="jumbotron">
@@ -15,10 +16,10 @@
       </div>
     </div>
     <div class="row">
-      <a href="/consultar.html" class="glyphicon glyphicon-th-list"> Llistat incidències</a>
+      <a href="/consultar.html" class="glyphicon glyphicon-th-list" target="_self"> Llistat incidències</a>
     </div>
     <div class="row">
-      <a href="crear.html" class="glyphicon glyphicon-plus"> Crear incidència</a>
+      <a href="/crear.html" class="glyphicon glyphicon-plus" target="_self"> Crear incidència</a>
     </div>
   </div>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>

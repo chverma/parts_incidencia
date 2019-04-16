@@ -35,13 +35,17 @@ function errorMessage(msg) {
     setTimeout(function(){ $('.alert-danger').css("display", "none"); }, 10000);
 }
 function createIncidenceController ($scope, $http) {
+  // Set navbar active
+  $scope.isCreate = true;
+  $scope.isList = false;
+
   // Get the faults
   $http.get('/faults/')
   .success(function (data) {
     $scope.faults = data;
   })
   .error(function (data) {
-    console.log('Error: ' + data);
+    console.log('Error: ', data);
   });
 
   $scope.formData = {}
@@ -52,7 +56,7 @@ function createIncidenceController ($scope, $http) {
     $scope.formData.prof_cog2 = data.secondFamilyName;
   })
   .error(function (data) {
-    console.log('Error: ' + data);
+    console.log('Error: ', data);
   });
 
   // When new incidence is created, send it to the backend API
@@ -67,6 +71,7 @@ function createIncidenceController ($scope, $http) {
     .success(function (data) {
       //$scope.formData = {};
       $scope.incidences = data;
+      console.log("*********DATA")
       console.log(data)
       if (data.code) {
         errorMessage('Ha ocorregut un error al crear l\'incidència.' + data.sqlMessage)
@@ -76,13 +81,21 @@ function createIncidenceController ($scope, $http) {
       }
     })
     .error(function (data) {
-      console.log('Error:' + data);
+      console.log(data)
+      if (data.error) {
+        data = ": " + data.message.sqlMessage;
+      } else {
+        data = "";
+      }
       errorMessage('Ha ocorregut un error al crear l\'incidència' + data)
     });
   };
 }
 // Returns one incidence by id
 function getDetailController ($scope, $http, $location) {
+  $scope.isCreate = false;
+  $scope.isList = false;
+
   $scope.formData = {};
   $scope.parameters = $location.search();
   // Get the faults
@@ -160,6 +173,9 @@ function getDetailController ($scope, $http, $location) {
 
 // Returns all the incidences
 function getAllController ($scope, $http) {
+  // Set navbar active
+  $scope.isCreate = false;
+  $scope.isList = true;
   // When the page is loadead, get from the API the incidences
   $http.get('/incidences')
   .success(function (data) {
@@ -181,4 +197,22 @@ function getAllController ($scope, $http) {
       errorMessage('Incidència no borrada. Ha ocorregut un error.')
     });
   };
+}
+
+function indexController ($scope, $http) {
+  $scope.isCreate = false;
+  $scope.isList = false;
+}
+
+// Returns all the incidences
+function navBarController ($scope, $http) {
+    $http.get('/user')
+    .success(function (data) {
+        console.log(data)
+        $scope.avatarImg = data.avatar;
+        $scope.email = data.email;
+    })
+    .error(function (data) {
+        console.log('Error: ' + data);
+    });
 }

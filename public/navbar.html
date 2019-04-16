@@ -1,0 +1,21 @@
+<nav ng-controller="navBarController" class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <a class="navbar-brand" href="./index.html" target="_self"><img src="./img/logo.png" style="height:25px; width:25px;"/></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li ng-class="{isCreate: active}"><a href="./crear.html" target="_self">Crear incidència</a></li>
+        <li ng-class="{isList: active}"><a href="./consultar.html" target="_self">Llistat d'incidències</a></li>
+      </ul>
+      
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">{{email}}</a></li>
+        <li><a href="#" style="height:25px; width:25px;"><img ng-src="{{avatarImg}}" class="img-circle" style="height:25px; width:25px;"></a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
