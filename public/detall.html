@@ -120,9 +120,10 @@
                 </div>
 
                 <div class="row col-md-12">
+                    <a role="button" class="btn btn-success btn-lg" target="_self" ng-href="/incidences/generate/{{formData.incidence_id}}">PDF</a>
                     <button class="btn btn-primary btn-lg" ng-click="modifyIncidence()">Modificar</button>
                     <button class="btn btn-danger btn-lg" ng-click="deleteIncidence()">Eliminar</button>
-                    <button class="btn btn-info btn-lg" ng-click="previousPage()">Tornar</button>
+                    <a role="button" class="btn btn-info btn-lg" target="_self" ng-href="/consultar.html">Tornar</a>
                 </div>
             </div>
           </form>
