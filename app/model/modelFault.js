@@ -18,4 +18,15 @@ Fault.getAllFaults = function (result) {
   });
 };
 
+Fault.getFaultById = function (id, result) {
+  sql.query('Select descripcio from faltes where falta_id = ?', [id], function (err, res) {
+    if (err) {
+      console.error('error: ', err);
+      result(null, err);
+    } else {
+      result(null, res);
+    }
+  });
+};
+
 module.exports = Fault;
