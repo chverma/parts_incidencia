@@ -44,13 +44,26 @@ Incidence.getIncidenceById = function (incidenceId, result) {
 };
 
 Incidence.getAllIncidence = function (email, result) {
-  sql.query(`Select * from incidence WHERE email = ?`, [email], function (err, res) {
+  sql.query(`Select email from administrators`, [], function (err, res) {
+    var emails = res.reduce((total, elem) => {total.push(elem.email); return total;}, [])
+
     if (err) {
-      console.error('error: ', err);
-      result(null, err);
-    } else {
-      result(null, res);
-    }
+        console.error('error: ', err);
+        result(null, err);
+      } else {
+        var where = '';
+        if (!emails.includes(email)) {
+          where = 'WHERE email = ?';
+        }
+        sql.query(`Select * from incidence ${where}`, [email], function (err, res) {
+          if (err) {
+            console.error('error: ', err);
+            result(null, err);
+          } else {
+            result(null, res);
+          }
+        });
+      }
   });
 };
 
