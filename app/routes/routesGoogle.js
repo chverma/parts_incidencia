@@ -104,4 +104,9 @@ module.exports = function (app) {
         //res.send(`<h1>Authentication using google oAuth</h1><a href=${url}>Login</a>`)
         //return res.end();
     });
+
+    app.use('/logout', function (req, res, next) {
+        req.session.destroy()
+        return res.redirect(301, "https://mail.google.com/mail/u/0/?logout&hl=en");
+    })
 };

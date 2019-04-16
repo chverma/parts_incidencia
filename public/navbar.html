@@ -14,7 +14,15 @@
       
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">{{email}}</a></li>
-        <li><a href="#" style="height:25px; width:25px;"><img ng-src="{{avatarImg}}" class="img-circle" style="height:25px; width:25px;"></a></li>
+        <li>
+          <div class="dropdown">
+            <button class="btn dropdown-toggle" type="button" data-toggle="dropdown"><a href="#" style="height:25px; width:25px;"><img ng-src="{{avatarImg}}" class="img-circle" style="height:25px; width:25px;"></a>
+              <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <li><a href="/logout" target="_self">Tancar sessió</a></li>
+            </ul>
+          </div>
+        </li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
