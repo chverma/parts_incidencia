@@ -94,9 +94,9 @@ exports.generate_pdf = function (req, res) {
       grup: incidence.grup,
       data_incidencia: str_date_incidencia,
       hora_incidencia: str_time_incidencia,
-      motiu: incidence.motiu,
-      proposta: incidence.proposta,
-      observacions: incidence.observacions,
+      motiu: incidence.motiu? incidence.motiu : '',
+      proposta: incidence.proposta? incidence.proposta : '',
+      observacions: incidence.observacions? incidence.observacions : '',
   });
 
   try {
