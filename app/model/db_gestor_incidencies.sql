@@ -72,6 +72,7 @@ CREATE TABLE `incidence` (
   `al_cog1` varchar(100) NOT NULL,
   `al_cog2` varchar(100) NOT NULL,
   `assignatura` varchar(100) NOT NULL,
+  `email` varchar(300) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -161,8 +162,24 @@ ALTER TABLE `tasks`
 --
 ALTER TABLE `incidence`
   ADD CONSTRAINT `incidence_ibfk_1` FOREIGN KEY (`motiu`) REFERENCES `faltes` (`falta_id`);
-COMMIT;
 
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tasks`
+--
+CREATE TABLE `administrators`(
+  `admin_id` int(11) NOT NULL,
+  `email` varchar(300) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE `administrators`
+  ADD PRIMARY KEY (`admin_id`);
+
+ALTER TABLE `administrators`
+    MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
