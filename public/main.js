@@ -48,6 +48,15 @@ function createIncidenceController ($scope, $http) {
     console.log('Error: ', data);
   });
 
+  // Get the proposals
+  $http.get('/proposals')
+  .success(function (data) {
+    $scope.proposals = data;
+  })
+  .error(function (data) {
+    console.log('Error: ', data);
+  });
+
   $scope.formData = {}
   $http.get('/user')
   .success(function (data) {
@@ -106,6 +115,16 @@ function getDetailController ($scope, $http, $location) {
   .error(function (data) {
     console.log('Error: ' + data);
   });
+
+  // Get the proposals
+  $http.get('/proposals')
+  .success(function (data) {
+    $scope.proposals = data;
+  })
+  .error(function (data) {
+    console.log('Error: ', data);
+  });
+
   // When the page is loadead, get from the API the incidences
   $http.get('/incidences/' + $scope.parameters.incidence_id)
   .success(function (data) {
@@ -124,7 +143,7 @@ function getDetailController ($scope, $http, $location) {
 	  format: 'DD-MM-YYYY',
       defaultDate: new Date($scope.formData.dia_com_pares),
     });
-	
+
 	//$('#dia_com_pares').val(parseDate($scope.formData.dia_com_pares, false));
   })
   .error(function (data) {

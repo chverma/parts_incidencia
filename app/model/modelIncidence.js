@@ -18,6 +18,7 @@ var Incidence = function (incidence) {
   this.assignatura = incidence.assignatura;
   this.created_at = new Date();
   this.email = incidence.email;
+  this.proposal_id = incidence.proposal_id;
 };
 
 Incidence.createIncidence = function (newIncidence, result) {
