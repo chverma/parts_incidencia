@@ -70,12 +70,33 @@ exports.generate_pdf = function (req, res) {
   var doc = new Docxtemplater();
   doc.loadZip(zip);
 
-  // set the templateVariables
-  doc.setData({
-      first_name: 'John',
-      last_name: 'Doe',
-      phone: '0652455478',
-      description: 'New Website'
+  Incidence.getIncidenceById(req.params.incidenceId, function (err, incidence) {
+    if (err) {
+      res.send(err);
+    }
+    incidence = incidence[0]
+    var date_incidencia = new Date(incidence.data)
+    var str_date_incidencia = `${date_incidencia.getDate()}/${date_incidencia.getMonth()+1}/${date_incidencia.getFullYear()}`
+    var str_time_incidencia = `${date_incidencia.getHours()}:${date_incidencia.getMinutes()}`
+
+    var data_com = new Date(incidence.data_com)
+    var str_date_com = `${data_com.getDate()}/${data_com.getMonth()+1}/${data_com.getFullYear()}`
+
+    doc.setData({
+      dia_com: str_date_com,
+      prof_nom: incidence.prof_nom,
+      prof_cog1: incidence.prof_cog1,
+      prof_cog2: incidence.prof_cog2,
+      al_nom: incidence.al_nom,
+      al_cog1: incidence.al_cog1,
+      al_cog2: incidence.al_cog2,
+      assignatura: incidence.assignatura,
+      grup: incidence.grup,
+      data_incidencia: str_date_incidencia,
+      hora_incidencia: str_time_incidencia,
+      motiu: incidence.motiu,
+      proposta: incidence.proposta,
+      observacions: incidence.observacions,
   });
 
   try {
@@ -127,5 +148,5 @@ exports.generate_pdf = function (req, res) {
   .catch((e) => {
     console.error(e);
   });
-
+  });
 };
