@@ -8,14 +8,13 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
-CREATE DATABASE IF NOT EXISTS `prova` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
-USE `prova`;
+CREATE DATABASE IF NOT EXISTS `db_gestor_incidencies` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
+USE `db_gestor_incidencies`;
 
 CREATE TABLE `administrators` (
   `admin_id` int(11) NOT NULL,
   `email` varchar(300) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 
 CREATE TABLE `faltes` (
   `falta_id` int(11) NOT NULL,
@@ -50,12 +49,9 @@ CREATE TABLE `incidence` (
   `al_cog2` varchar(100) NOT NULL,
   `assignatura` varchar(100) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `email` varchar(300) NOT NULL
+  `email` varchar(300) NOT NULL,
+  `proposal_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-INSERT INTO `incidence` (`incidence_id`, `grup`, `data`, `motiu`, `observacions`, `dia_com_pares`, `comentaris`, `prof_nom`, `prof_cog1`, `prof_cog2`, `al_nom`, `al_cog1`, `al_cog2`, `assignatura`, `created_at`, `email`) VALUES
-(10, 'sdasd', '2019-04-09 18:47:00', 8, 'asd', '2019-04-02', 'asdad', 'asdad', 'add', 'asd', 'asdad', 'asdad', 'asdd', 'asdad', '2019-04-06 18:48:37', ''),
-(11, 'sadad', '2019-04-08 19:05:00', 5, 'asdd', '2019-05-02', 'asdd', 'asdd', 'asdd', 'asdd', 'sadsd', 'asdd', 'asd', 'asdd', '2019-04-06 19:05:24', '');
 
 CREATE TABLE `propostes` (
   `proposal_id` int(11) NOT NULL,
@@ -69,20 +65,6 @@ INSERT INTO `propostes` (`proposal_id`, `descripcio`) VALUES
 (3, '4) Suspensió del dret d\'assistència a determinades classes per un període d\'entre sis i quinze dies lectius, efectuant els treballs encomanats per part del professorat que li imparteix docència. (h, m, n)'),
 (4, '5) Suspensió del dret d\'assistència al centre educatiu durant un període comprés entre sis i trenta dies lectius.');
 
-CREATE TABLE `tasks` (
-  `id` int(11) NOT NULL,
-  `task` varchar(200) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '1',
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-INSERT INTO `tasks` (`id`, `task`, `status`, `created_at`) VALUES
-(1, 'Find bugs', 1, '2016-04-10 23:50:40'),
-(2, 'Review code', 1, '2016-04-10 23:50:40'),
-(3, 'Fix bugs', 1, '2016-04-10 23:50:40'),
-(4, 'Refactor Code', 1, '2016-04-10 23:50:40'),
-(5, 'Push to prod', 1, '2016-04-10 23:50:50');
-
 
 ALTER TABLE `administrators`
   ADD PRIMARY KEY (`admin_id`);
@@ -92,13 +74,11 @@ ALTER TABLE `faltes`
 
 ALTER TABLE `incidence`
   ADD PRIMARY KEY (`incidence_id`),
-  ADD KEY `motiu` (`motiu`);
+  ADD KEY `motiu` (`motiu`),
+  ADD KEY `incidence_ibfk_2` (`proposal_id`);
 
 ALTER TABLE `propostes`
   ADD PRIMARY KEY (`proposal_id`);
-
-ALTER TABLE `tasks`
-  ADD PRIMARY KEY (`id`);
 
 
 ALTER TABLE `administrators`
@@ -108,19 +88,14 @@ ALTER TABLE `faltes`
   MODIFY `falta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 ALTER TABLE `incidence`
-  MODIFY `incidence_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `incidence_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 ALTER TABLE `propostes`
   MODIFY `proposal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
-ALTER TABLE `tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
 
 ALTER TABLE `incidence`
-  ADD CONSTRAINT `incidence_ibfk_1` FOREIGN KEY (`motiu`) REFERENCES `faltes` (`falta_id`);
-
-ALTER TABLE `incidence`
+  ADD CONSTRAINT `incidence_ibfk_1` FOREIGN KEY (`motiu`) REFERENCES `faltes` (`falta_id`),
   ADD CONSTRAINT `incidence_ibfk_2` FOREIGN KEY (`proposal_id`) REFERENCES `propostes` (`proposal_id`);
 COMMIT;
 
