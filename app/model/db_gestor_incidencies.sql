@@ -1,43 +1,26 @@
--- phpMyAdmin SQL Dump
--- version 4.8.5
--- https://www.phpmyadmin.net/
---
--- Servidor: localhost
--- Tiempo de generación: 08-04-2019 a las 08:29:58
--- Versión del servidor: 5.7.25-0ubuntu0.18.04.2
--- Versión de PHP: 7.2.15-0ubuntu0.18.04.1
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
-
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
---
--- Base de datos: `prova`
---
 CREATE DATABASE IF NOT EXISTS `prova` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
 USE `prova`;
 
--- --------------------------------------------------------
+CREATE TABLE `administrators` (
+  `admin_id` int(11) NOT NULL,
+  `email` varchar(300) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Estructura de tabla para la tabla `faltes`
---
 
 CREATE TABLE `faltes` (
   `falta_id` int(11) NOT NULL,
   `descripcio` varchar(300) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `faltes`
---
 
 INSERT INTO `faltes` (`falta_id`, `descripcio`) VALUES
 (0, 'Cometre actes greus d\'indisciplina, injúria i ofensa. (a, h, k)'),
@@ -50,12 +33,6 @@ INSERT INTO `faltes` (`falta_id`, `descripcio`) VALUES
 (7, 'Incitar o estimular a cometre una falta que afecte greument la convivència en el centre. (l)'),
 (8, 'Negar-se reiteradament a complir les mesures correctores o disciplinàries. (m, n)'),
 (9, 'Actes atemptatoris respecte al projecte educatiu així com al caràcter del centre. (p)');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `incidence`
---
 
 CREATE TABLE `incidence` (
   `incidence_id` int(11) NOT NULL,
@@ -72,23 +49,25 @@ CREATE TABLE `incidence` (
   `al_cog1` varchar(100) NOT NULL,
   `al_cog2` varchar(100) NOT NULL,
   `assignatura` varchar(100) NOT NULL,
-  `email` varchar(300) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `email` varchar(300) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `incidence`
---
+INSERT INTO `incidence` (`incidence_id`, `grup`, `data`, `motiu`, `observacions`, `dia_com_pares`, `comentaris`, `prof_nom`, `prof_cog1`, `prof_cog2`, `al_nom`, `al_cog1`, `al_cog2`, `assignatura`, `created_at`, `email`) VALUES
+(10, 'sdasd', '2019-04-09 18:47:00', 8, 'asd', '2019-04-02', 'asdad', 'asdad', 'add', 'asd', 'asdad', 'asdad', 'asdd', 'asdad', '2019-04-06 18:48:37', ''),
+(11, 'sadad', '2019-04-08 19:05:00', 5, 'asdd', '2019-05-02', 'asdd', 'asdd', 'asdd', 'asdd', 'sadsd', 'asdd', 'asd', 'asdd', '2019-04-06 19:05:24', '');
 
-INSERT INTO `incidence` (`incidence_id`, `grup`, `data`, `motiu`, `observacions`, `dia_com_pares`, `comentaris`, `prof_nom`, `prof_cog1`, `prof_cog2`, `al_nom`, `al_cog1`, `al_cog2`, `assignatura`, `created_at`) VALUES
-(10, 'sdasd', '2019-04-09 18:47:00', 8, 'asd', '2019-04-02', 'asdad', 'asdad', 'add', 'asd', 'asdad', 'asdad', 'asdd', 'asdad', '2019-04-06 18:48:37'),
-(11, 'sadad', '2019-04-08 19:05:00', 5, 'asdd', '2019-05-02', 'asdd', 'asdd', 'asdd', 'asdd', 'sadsd', 'asdd', 'asd', 'asdd', '2019-04-06 19:05:24');
+CREATE TABLE `propostes` (
+  `proposal_id` int(11) NOT NULL,
+  `descripcio` varchar(300) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tasks`
---
+INSERT INTO `propostes` (`proposal_id`, `descripcio`) VALUES
+(0, '1) Realització de tasques educadores, en horari no lectiu, per un període d\'entre cinc i quinze dies lectius. (h, m, n)'),
+(1, '2) Suspensió del dret a participar en les activitats extraescolars durant els trenta dies següents a la imposició de la mesura disciplinària. (h, m, n)'),
+(2, '3) Canvi de grup de l\'alumne/a per un període d\'entre cinc i quinze dies lectius. (h, m, n)'),
+(3, '4) Suspensió del dret d\'assistència a determinades classes per un període d\'entre sis i quinze dies lectius, efectuant els treballs encomanats per part del professorat que li imparteix docència. (h, m, n)'),
+(4, '5) Suspensió del dret d\'assistència al centre educatiu durant un període comprés entre sis i trenta dies lectius.');
 
 CREATE TABLE `tasks` (
   `id` int(11) NOT NULL,
@@ -97,10 +76,6 @@ CREATE TABLE `tasks` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `tasks`
---
-
 INSERT INTO `tasks` (`id`, `task`, `status`, `created_at`) VALUES
 (1, 'Find bugs', 1, '2016-04-10 23:50:40'),
 (2, 'Review code', 1, '2016-04-10 23:50:40'),
@@ -108,78 +83,47 @@ INSERT INTO `tasks` (`id`, `task`, `status`, `created_at`) VALUES
 (4, 'Refactor Code', 1, '2016-04-10 23:50:40'),
 (5, 'Push to prod', 1, '2016-04-10 23:50:50');
 
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `faltes`
---
-ALTER TABLE `faltes`
-  ADD PRIMARY KEY (`falta_id`);
-
---
--- Indices de la tabla `incidence`
---
-ALTER TABLE `incidence`
-  ADD PRIMARY KEY (`incidence_id`),
-  ADD KEY `motiu` (`motiu`);
-
---
--- Indices de la tabla `tasks`
---
-ALTER TABLE `tasks`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `faltes`
---
-ALTER TABLE `faltes`
-  MODIFY `falta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT de la tabla `incidence`
---
-ALTER TABLE `incidence`
-  MODIFY `incidence_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
---
--- AUTO_INCREMENT de la tabla `tasks`
---
-ALTER TABLE `tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `incidence`
---
-ALTER TABLE `incidence`
-  ADD CONSTRAINT `incidence_ibfk_1` FOREIGN KEY (`motiu`) REFERENCES `faltes` (`falta_id`);
-
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tasks`
---
-CREATE TABLE `administrators`(
-  `admin_id` int(11) NOT NULL,
-  `email` varchar(300) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 ALTER TABLE `administrators`
   ADD PRIMARY KEY (`admin_id`);
 
+ALTER TABLE `faltes`
+  ADD PRIMARY KEY (`falta_id`);
+
+ALTER TABLE `incidence`
+  ADD PRIMARY KEY (`incidence_id`),
+  ADD KEY `motiu` (`motiu`);
+
+ALTER TABLE `propostes`
+  ADD PRIMARY KEY (`proposal_id`);
+
+ALTER TABLE `tasks`
+  ADD PRIMARY KEY (`id`);
+
+
 ALTER TABLE `administrators`
-    MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+ALTER TABLE `faltes`
+  MODIFY `falta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+ALTER TABLE `incidence`
+  MODIFY `incidence_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+ALTER TABLE `propostes`
+  MODIFY `proposal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+ALTER TABLE `tasks`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+
+ALTER TABLE `incidence`
+  ADD CONSTRAINT `incidence_ibfk_1` FOREIGN KEY (`motiu`) REFERENCES `faltes` (`falta_id`);
+
+ALTER TABLE `incidence`
+  ADD CONSTRAINT `incidence_ibfk_2` FOREIGN KEY (`proposal_id`) REFERENCES `propostes` (`proposal_id`);
 COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

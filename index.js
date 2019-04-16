@@ -54,6 +54,8 @@ var signInRoutes = require('./app/routes/routesGoogle');
 signInRoutes(app);
 var userRoutes = require('./app/routes/routesUser');
 userRoutes(app);
+var proposalsRoutes = require('./app/routes/routesProposals');
+proposalsRoutes(app);
 
 // Listen & run server
 app.listen(port, function () {
